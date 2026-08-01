@@ -1,0 +1,20 @@
+# MCUXpresso build artifacts
+Debug/
+Release/
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+
+# MCUXpresso workspace/IDE files
+.metadata/
+.settings/
+.project
+.cproject
+.launch
+
+# OS files
+.DS_Store
+Thumbs.db
