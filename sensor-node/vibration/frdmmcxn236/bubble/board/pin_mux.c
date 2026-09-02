@@ -65,6 +65,8 @@ BOARD_InitPins:
  * END ****************************************************************************************************************/
 void BOARD_InitPins(void)
 {
+	/* Enables the clock for PORT0*/
+	CLOCK_EnableClock(kCLOCK_Port0);
     /* Enables the clock for PORT1: Enables clock */
     CLOCK_EnableClock(kCLOCK_Port1);
     /* Enables the clock for PORT4: Enables clock */
@@ -161,6 +163,25 @@ void BOARD_InitPins(void)
                                                       .lockRegister = kPORT_UnlockRegister};
     /* PORT4_19 (pin R10) is configured as CT3_MAT3 */
     PORT_SetPinConfig(PORT4, 19U, &port4_19_pinR10_config);
+
+    /* CAN0 Pin Configurations */
+    const port_pin_config_t can_pin_config = {
+        .pullSelect          = kPORT_PullDisable,
+        .pullValueSelect     = kPORT_LowPullResistor,
+        .slewRate            = kPORT_FastSlewRate,
+        .passiveFilterEnable = kPORT_PassiveFilterDisable,
+        .openDrainEnable     = kPORT_OpenDrainDisable,
+        .driveStrength       = kPORT_LowDriveStrength,
+        .mux                 = kPORT_MuxAlt9,             /* Alt9 routes PIO0_28/29 to CAN0 */
+        .inputBuffer         = kPORT_InputBufferEnable,
+        .invertInput         = kPORT_InputNormal,
+        .lockRegister        = kPORT_UnlockRegister
+    };
+
+    /* PIO0_28 -> CAN0 TX */
+    PORT_SetPinConfig(PORT0, 28U, &can_pin_config);
+    /* PIO0_29 -> CAN0 RX */
+    PORT_SetPinConfig(PORT0, 29U, &can_pin_config);
 }
 
 /* clang-format off */
