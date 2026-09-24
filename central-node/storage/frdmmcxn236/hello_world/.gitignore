@@ -1,0 +1,8 @@
+debug/
+build/
+.vscode/
+*.elf
+*.obj
+*.o
+*.map
+*.bin
